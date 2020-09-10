@@ -115,13 +115,34 @@
                                         <div class="has-text-weight-bold">Social Platforms:</div>
                                         <div ng-show='hasSocial(athDisplay.social)'>
                                             <ul class='content'>
-                                                <li><i class="fa fa-facebook-square"></i>&nbsp;Facebook: {{athDisplay.social.facebook||'Unknown'}}</li>
-                                                <li><i class="fa fa-linkedin-square"></i>&nbsp;LinkedIn: {{athDisplay.social.linkedin||'Unknown'}}</li>
-                                                <li><i class="fa fa-twitter-square"></i>&nbsp;Twitter: {{athDisplay.social.twitter||'Unknown'}}</li>
-                                                <li><i class="fa fa-instagram"></i>&nbsp;Instagram: {{athDisplay.social.instagram||'Unknown'}}</li>
-                                                <li><i class="fa fa-youtube-square"></i>&nbsp;YouTube: {{athDisplay.social.youtube||'Unknown'}}</li>
-                                                <li><i class="fa fa-twitch"></i>&nbsp;Twitch: {{athDisplay.social.twitch||'Unknown'}}</li>
-                                                <li><i class="fa fa-snapchat-square"></i>&nbsp;Snapchat: {{athDisplay.social.twitch||'Unknown'}}</li>
+                                                <li><i class="fa fa-facebook-square"></i>&nbsp;Facebook:
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.facebook'></span>
+                                                    <a ng-show='athDisplay.social.facebook' href="{{athDisplay.social.facebook">{{athDisplay.social.facebook}}</a>
+                                                </li>
+                                                <li><i class="fa fa-linkedin-square"></i>&nbsp;LinkedIn:
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.linkedin'></span>
+                                                    <a ng-show='athDisplay.social.linkedin' href="{{athDisplay.social.linkedin">{{athDisplay.social.facebook}}</a>
+                                                </li>
+                                                <li><i class="fa fa-twitter-square"></i>&nbsp;Twitter:
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.twitter'></span>
+                                                    <a ng-show='athDisplay.social.twitter' href="{{athDisplay.social.twitter">{{athDisplay.social.facebook}}</a>
+                                                </li>
+                                                <li><i class="fa fa-instagram"></i>&nbsp;Instagram:
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.instagram'></span>
+                                                    <a ng-show='athDisplay.social.instagram' href="{{athDisplay.social.instagram">{{athDisplay.social.facebook}}</a>
+                                                </li>
+                                                <li><i class="fa fa-youtube-square"></i>&nbsp;YouTube:
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.youtube'></span>
+                                                    <a ng-show='athDisplay.social.youtube' href="{{athDisplay.social.youtube">{{athDisplay.social.facebook}}</a>
+                                                </li>
+                                                <li><i class="fa fa-twitch"></i>&nbsp;Twitch:
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.twitch'></span>
+                                                    <a ng-show='athDisplay.social.twitch' href="{{athDisplay.social.twitch">{{athDisplay.social.facebook}}</a>
+                                                </li>
+                                                <li><i class="fa fa-snapchat-square"></i>&nbsp;Snapchat:
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.snapchat'></span>
+                                                    <a ng-show='athDisplay.social.snapchat' href="{{athDisplay.social.snapchat">{{athDisplay.social.facebook}}</a>
+                                                </li>
                                             </ul>
                                         </div>
                                         <div ng-if='!hasSocial(athDisplay.social)'>
@@ -166,9 +187,9 @@
                                 <div class="message is-info">
                                     <div class="message-body">
                                         <div class="has-text-weight-bold">Drinks Alcohol:</div>
-                                            <div ng-if='athDisplay.drinks==2'><i class="fa fa-beer"></i> Often</div>
-                                            <div ng-if='athDisplay.drinks==1'><i class="fa fa-glass"></i> Rarely</div>
-                                            <div ng-if='!athDisplay.drinks'><i class="fa fa-times"></i>Never</div>
+                                        <div ng-if='athDisplay.drinks==2'><i class="fa fa-beer"></i> Often</div>
+                                        <div ng-if='athDisplay.drinks==1'><i class="fa fa-glass"></i> Rarely</div>
+                                        <div ng-if='!athDisplay.drinks'><i class="fa fa-times"></i>Never</div>
                                     </div>
                                 </div>
                             </div>
