@@ -7,4 +7,4 @@ It's a test app for Opensponsorship
 I did! I'm Dave. Hi!
 
 ### Where it Lives
-You can see it live at dave-newman-os-app.herokuapp.com.
+You can see it live at [this link](https://dave-newman-os-app.herokuapp.com).
