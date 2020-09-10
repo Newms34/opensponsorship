@@ -37,7 +37,8 @@ const routeExp = function (io) {
             res.send('done');
         })
     })
-    router.delete('/athlete',(req,res,next)=>{
+    //normally I'd make this a DELETE request. But the requirements requested a PUT request. This is the only place I can reasonably see doing that.
+    router.put('/athlete',(req,res,next)=>{
         if(!req.query.id){
             return res.status(400).send('err');
         }

@@ -35,7 +35,7 @@ app.controller('allAth-cont', function ($scope, $http, $state,$log) {
     $scope.deleteAth=a=>{
         bulmabox.confirm('Delete Athlete',`Are you sure you wish to delete ${a.name} from the database?<br> This action is not reversable!`,r=>{
             if(!!r){
-                $http.delete('/athletes/athlete?id='+a._id).then(r=>{
+                $http.put('/athletes/athlete?id='+a._id).then(r=>{
                     bulmabox.alert('Athlete removed!',"That athlete has been deleted successfully");
                     $state.go($state.current, {}, {reload: true})
                 }).catch(e=>{
