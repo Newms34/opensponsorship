@@ -64,9 +64,15 @@ app.controller('all-cont', function ($scope, $http, $state,$log) {
         //basically, we're looking to see if the user has provided *any* social media things
         return !!Object.values(s).filter(q=>!!q).length;
     }
-
-    $scope.submitAth = ()=>{
+    $scope.formatLink = (pref,info)=>{
+        if(!info) return '';
+        if (!info.startsWith(pref) && !info.startsWith(`http://${pref}`) && !info.startsWith(`https://${pref}`) && !info.startsWith(`http://wwww.${pref}`) && !info.startsWith(`https://www${pref}`)){
+            pref = `https://${pref}${info}`;
+        }
+        return pref.replace('http:','https:');//force https
         
+    }
+    $scope.submitAth = ()=>{
         $scope.athDisplay.birth = $scope.athDisplay.dob.getTime();
         $http.post('/athletes/athlete',$scope.athDisplay).then(r=>{
             $scope.closeDisplay();

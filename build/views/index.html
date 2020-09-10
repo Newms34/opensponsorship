@@ -116,32 +116,32 @@
                                         <div ng-show='hasSocial(athDisplay.social)'>
                                             <ul class='content'>
                                                 <li><i class="fa fa-facebook-square"></i>&nbsp;Facebook:
-                                                    <span class="has-text-grey" ng-if='!athDisplay.social.facebook'></span>
-                                                    <a ng-show='athDisplay.social.facebook' href="{{athDisplay.social.facebook">{{athDisplay.social.facebook}}</a>
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.facebook'>(Not provided)</span>
+                                                    <a target="_blank" ng-show='athDisplay.social.facebook' href="{{formatLink('facebook.com/',athDisplay.social.facebook)}}">{{athDisplay.social.facebook}}</a>
                                                 </li>
                                                 <li><i class="fa fa-linkedin-square"></i>&nbsp;LinkedIn:
-                                                    <span class="has-text-grey" ng-if='!athDisplay.social.linkedin'></span>
-                                                    <a ng-show='athDisplay.social.linkedin' href="{{athDisplay.social.linkedin">{{athDisplay.social.facebook}}</a>
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.linkedin'>(Not provided)</span>
+                                                    <a target="_blank" ng-show='athDisplay.social.linkedin' href="{{formatLink('linkedin.com/in/',athDisplay.social.linkedin)}}">{{athDisplay.social.linkedin}}</a>
                                                 </li>
                                                 <li><i class="fa fa-twitter-square"></i>&nbsp;Twitter:
-                                                    <span class="has-text-grey" ng-if='!athDisplay.social.twitter'></span>
-                                                    <a ng-show='athDisplay.social.twitter' href="{{athDisplay.social.twitter">{{athDisplay.social.facebook}}</a>
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.twitter'>(Not provided)</span>
+                                                    <a target="_blank" ng-show='athDisplay.social.twitter' href="{{formatLink('twitter.com/',athDisplay.social.twitter)}}">{{athDisplay.social.twitter}}</a>
                                                 </li>
                                                 <li><i class="fa fa-instagram"></i>&nbsp;Instagram:
-                                                    <span class="has-text-grey" ng-if='!athDisplay.social.instagram'></span>
-                                                    <a ng-show='athDisplay.social.instagram' href="{{athDisplay.social.instagram">{{athDisplay.social.facebook}}</a>
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.instagram'>(Not provided)</span>
+                                                    <a target="_blank" ng-show='athDisplay.social.instagram' href="{{formatLink('instagram.com/',athDisplay.social.instagram)}}">{{athDisplay.social.instagram}}</a>
                                                 </li>
                                                 <li><i class="fa fa-youtube-square"></i>&nbsp;YouTube:
-                                                    <span class="has-text-grey" ng-if='!athDisplay.social.youtube'></span>
-                                                    <a ng-show='athDisplay.social.youtube' href="{{athDisplay.social.youtube">{{athDisplay.social.facebook}}</a>
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.youtube'>(Not provided)</span>
+                                                    <a target="_blank" ng-show='athDisplay.social.youtube' href="{{formatLink('youtube.com/channel/',athDisplay.social.youtube)}}">{{athDisplay.social.youtube}}</a>
                                                 </li>
                                                 <li><i class="fa fa-twitch"></i>&nbsp;Twitch:
-                                                    <span class="has-text-grey" ng-if='!athDisplay.social.twitch'></span>
-                                                    <a ng-show='athDisplay.social.twitch' href="{{athDisplay.social.twitch">{{athDisplay.social.facebook}}</a>
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.twitch'>(Not provided)</span>
+                                                    <a target="_blank" ng-show='athDisplay.social.twitch' href="{{formatLink('twitch.tv/',athDisplay.social.twitch)}}">{{athDisplay.social.twitch}}</a>
                                                 </li>
                                                 <li><i class="fa fa-snapchat-square"></i>&nbsp;Snapchat:
-                                                    <span class="has-text-grey" ng-if='!athDisplay.social.snapchat'></span>
-                                                    <a ng-show='athDisplay.social.snapchat' href="{{athDisplay.social.snapchat">{{athDisplay.social.facebook}}</a>
+                                                    <span class="has-text-grey" ng-if='!athDisplay.social.snapchat'>(Not provided)</span>
+                                                    <a target="_blank" ng-show='athDisplay.social.snapchat' href="{{formatLink('snapchat.com/s/',athDisplay.social.snapchat)}}">{{athDisplay.social.snapchat}}</a>
                                                 </li>
                                             </ul>
                                         </div>
