@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html ng-app='OSTest-app'>
+
+<head>
+    <base href="/">
+    <title>Open Sponsorship Athlete Tracking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="57x57" href="/img/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/img/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/img/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/img/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/img/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/img/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/img/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/icons/favicon-16x16.png">
+    <link rel="stylesheet" href="https://d1h9a8s8eodvjz.cloudfront.net/fonts/menomonia/08-02-12/menomonia.css">
+    <!-- <link rel="manifest" href="/img/icons/manifest.json"> -->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="https://use.fontawesome.com/7e20a6e4fe.js"></script>
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.cssn"> -->
+    <link rel="stylesheet" type="text/css" href="/css/styles.28069d28.css">
+</head>
+
+<body ng-cloak ng-controller='all-cont'>
+    <ui-view></ui-view>
+    <div class="modal" ng-class='{"is-active":athDisplay.active}'>
+        <div class="modal-background"></div>
+        <div class="modal-content big-modal">
+            <div class="panel is-link">
+                <div class="panel-heading">{{athDisplay.name}} Profile <span ng-if='athDisplay.isAccept'>Preview</span><button class="button is-small is-pulled-right" ng-click='closeDisplay()'><i class="fa fa-times"></i></button></div>
+                <div class="panel-block blocky-panel has-background-white">
+                    <div class="is-fullwidth columns multiline">
+                        <div class="column is-one-fifth has-background-grey">
+                            <div class="message is-fullwidth has-background-grey-light has-text-centered is-italic is-size-5" style='min-height:100px' ng-if='!athDisplay.img'>
+                                (No picture provided)
+                            </div>
+                            <img src="{{athDisplay.img}}" alt="" class="is-fullwidth" ng-if='!!athDisplay.img'>
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="tabs is-boxed is-fullwidth">
+                                <ul>
+                                    <li ng-repeat='section in sections' ng-class='{"is-active":athDisplay.tab==$index}'>
+                                        <a ng-click='setCurrTab($index)'>
+                                            <span><i class="fa fa-{{section.icon}}  "></i> {{section.title}}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <hr>
+                            <div class="is-fullwidth" ng-show='athDisplay.tab==0'>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Name:</div>
+                                        {{athDisplay.name||'Unknown'}}
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Nationality:</div>
+                                        {{athDisplay.nationality||'Unknown'}}
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Current Location:</div>
+                                        {{athDisplay.location||'Unknown'}}
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Gender:</div>
+                                        {{athDisplay.gender||'Unknown'}}
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Date of Birth:</div>
+                                        {{athDisplay.birth?getDob(athDisplay.birth):'Unknown'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="is-fullwidth" ng-show='athDisplay.tab==1'>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Sports:</div>
+                                        <ul>
+                                            <li class='checklist' ng-repeat='sp in athDisplay.sports'>{{sp}}</li>
+                                            <li class="badlist" ng-if='!athDisplay.sports.length'>(None given)</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Association:</div>
+                                        {{athDisplay.association||'Not given'}}
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Team:</div>
+                                        {{athDisplay.team||'Not given'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="is-fullwidth" ng-show='athDisplay.tab==2'>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Social Platforms:</div>
+                                        <div ng-show='hasSocial(athDisplay.social)'>
+                                            <ul class='content'>
+                                                <li><i class="fa fa-facebook-square"></i>&nbsp;Facebook: {{athDisplay.social.facebook||'Unknown'}}</li>
+                                                <li><i class="fa fa-linkedin-square"></i>&nbsp;LinkedIn: {{athDisplay.social.linkedin||'Unknown'}}</li>
+                                                <li><i class="fa fa-twitter-square"></i>&nbsp;Twitter: {{athDisplay.social.twitter||'Unknown'}}</li>
+                                                <li><i class="fa fa-instagram"></i>&nbsp;Instagram: {{athDisplay.social.instagram||'Unknown'}}</li>
+                                                <li><i class="fa fa-youtube-square"></i>&nbsp;YouTube: {{athDisplay.social.youtube||'Unknown'}}</li>
+                                                <li><i class="fa fa-twitch"></i>&nbsp;Twitch: {{athDisplay.social.twitch||'Unknown'}}</li>
+                                                <li><i class="fa fa-snapchat-square"></i>&nbsp;Snapchat: {{athDisplay.social.twitch||'Unknown'}}</li>
+                                            </ul>
+                                        </div>
+                                        <div ng-if='!hasSocial(athDisplay.social)'>
+                                            (None provided)
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Interests:</div>
+                                        {{athDisplay.interests||'Not given'}}
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Charities:</div>
+                                        {{athDisplay.charities||'Not given'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="is-fullwidth" ng-show='athDisplay.tab==3'>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">About:</div>
+                                        {{athDisplay.about||'No information given'}}
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Pets:</div>
+                                        {{athDisplay.pets||'No pets!'}}
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Marital Status:</div>
+                                        <div ng-if='athDisplay.married==2'><i class="fa fa-users"></i> Married</div>
+                                        <div ng-if='athDisplay.married==1'><i class="fa fa-users separated-marry"></i> Divorced/Separated/Widowed</div>
+                                        <div ng-if='!athDisplay.married'><i class="fa fa-user"></i> Single</div>
+                                    </div>
+                                </div>
+                                <div class="message is-info">
+                                    <div class="message-body">
+                                        <div class="has-text-weight-bold">Drinks Alcohol:</div>
+                                            <div ng-if='athDisplay.drinks==2'><i class="fa fa-beer"></i> Often</div>
+                                            <div ng-if='athDisplay.drinks==1'><i class="fa fa-glass"></i> Rarely</div>
+                                            <div ng-if='!athDisplay.drinks'><i class="fa fa-times"></i>Never</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="is-fullwidth has-text-centered" ng-show='athDisplay.isAccept'>
+                                <!-- this section only displays if our athDisplay box is being used on the 'submit new athlete' page -->
+                                <hr>
+                                <button class="button is-link is-large" ng-click='submitAth(athDisplay)'><i class="fa fa-check"></i> Accept</button>
+                                <button class="button is-info is-large" ng-click='closeDisplay()'><i class="fa fa-arrow-left"></i> Go back</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/all.min.db377958.js"></script>
+</body>
+
+</html>

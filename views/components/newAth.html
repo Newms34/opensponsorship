@@ -1,0 +1,343 @@
+<div ng-controller='newAth-cont'>
+    <div class="panel is-info">
+        <div class="panel-heading"><i class="fa fa-users"></i> Add Athletes</div>
+        <div class="panel-block has-background-white blocky-panel">
+            <div class="tabs is-boxed is-fullwidth">
+                <ul>
+                    <li ng-repeat='section in sections' ng-class='{"is-active":currTab==$index}'>
+                        <a ng-click='setCurrTab($index)'>
+                            <span><i class="fa fa-{{section.icon}}  "></i> {{section.title}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="is-fullwidth is-italic">* = Required</div>
+            <hr>
+            <div class="panel is-link" ng-show='currTab===0'>
+                <div class="panel-heading">Basic Information</div>
+                <div class="panel-block blocky-panel">
+                    <div class="message is-italic is-fullwidth">First, tell us who your athlete is.</div>
+                    <br>
+                    <div class="is-fullwidth columns is-multiline">
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Name*
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <input class="input" type="text" placeholder="John Smith" ng-model='newUser.name'>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Nationality*
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="select">
+                                <select ng-model='newUser.nationality' ng-options='n for n in info.countries'>
+                                    <option value="" selected disabled>--Please select an option--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Location*
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="select">
+                                <select ng-model='newUser.location' ng-options='n for n in info.countries'>
+                                    <option value="" selected disabled>--Please select an option--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Gender*
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="select">
+                                <select ng-model='newUser.gender' ng-options='g for g in info.genders'>
+                                    <option value="" selected disabled>--Please select an option--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Date of Birth*
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <input class="input" type="date" placeholder="00/00/0000" ng-model='newUser.dob'>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="panel is-link" ng-show='currTab===1'>
+                <div class="panel-heading">Athletic Information</div>
+                <div class="panel-block blocky-panel">
+                    <div class="message is-italic is-fullwidth">Now tell us all about the sports your athlete plays.</div>
+                    <br>
+                    <div class="is-fullwidth columns is-multiline">
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Sports*
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="message">
+                                <div class="button is-info" title='Click to remove' ng-repeat='sp in newUser.sports' ng-click='removeItem("sports",sp)'>{{sp}}</div>
+                            </div>
+                            <div class="select">
+                                <select ng-model='cand.sport' ng-options='n for n in filterStuff(info.sports,newUser.sports)'>
+                                    <option value="" selected disabled>--Please select an option--</option>
+                                </select>
+                            </div><button class="button is-link" ng-disabled='!cand.sport' ng-click='addItem("sports",cand.sport)'><i class="fa fa-plus"></i>&nbsp;Add</button>
+                        </div>
+                        <hr>
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Association
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <input class="input" type="text" placeholder="NFL" ng-model='newUser.association'>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Team
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Giants" ng-model='newUser.team'>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="panel is-link" ng-show='currTab===2'>
+                <div class="panel-heading">Social Information</div>
+                <div class="panel-block blocky-panel">
+                    <div class="message is-italic is-fullwidth">Tell us about your athlete's social information</div>
+                    <br>
+                    <div class="is-fullwidth columns is-multiline">
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Social Platforms
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <div class="is-italic">Fill in as many (or as few) as you want!</div>
+                                <ul class='content'>
+                                    <li><i class="fa fa-facebook-square"></i>&nbsp;<input class='custom-input' type="text" ng-model=newUser.social.facebook></li>
+                                    <li><i class="fa fa-linkedin-square"></i>&nbsp;<input class='custom-input' type="text" ng-model=newUser.social.linkedin></li>
+                                    <li><i class="fa fa-twitter-square"></i>&nbsp;<input class='custom-input' type="text" ng-model=newUser.social.twitter></li>
+                                    <li><i class="fa fa-instagram"></i>&nbsp;<input class='custom-input' type="text" ng-model=newUser.social.instagram></li>
+                                    <li><i class="fa fa-youtube-square"></i>&nbsp;<input class='custom-input' type="text" ng-model=newUser.social.youtube></li>
+                                    <li><i class="fa fa-twitch"></i>&nbsp;<input class='custom-input' type="text" ng-model=newUser.social.twitch></li>
+                                    <li><i class="fa fa-snapchat-square"></i>&nbsp;<input class='custom-input' type="text" ng-model=newUser.social.snapchat></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Interests
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <textarea class='textarea' placeholder="Does your athlete have any interests you'd like to share?" ng-model='newUser.interests'></textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Charities
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <textarea class='textarea' placeholder="Is your athlete involved in any charities?" ng-model='newUser.charities'></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel is-link" ng-show='currTab===3'>
+                <div class="panel-heading">Miscellaneous Information</div>
+                <div class="panel-block blocky-panel">
+                    <div class="message is-italic is-fullwidth">Any other information you'd like to add?</div>
+                    <br>
+                    <div class="is-fullwidth columns is-multiline">
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            About
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <textarea class='textarea' placeholder="Describe your athlete" ng-model='newUser.about'></textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Pets
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="control">
+                                <textarea class='textarea' placeholder="Does your athlete have any pets?" ng-model='newUser.pets'></textarea>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Marital Status*
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="select">
+                                <select ng-model='newUser.married' ng-options='m.num as m.title for m in info.marital'>
+                                    <option value="" selected disabled>--Please select an option--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="column is-one-fifth message is-light-blue has-text-weight-bold">
+                            Drinks Alcohol*
+                        </div>
+                        <div class="column is-four-fifths">
+                            <div class="select">
+                                <select ng-model='newUser.drinks' ng-options='d.num as d.title for d in info.drinks'>
+                                    <option value="" selected disabled>--Please select an option--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="panel is-link" ng-show='currTab===4'>
+                <div class="panel-heading">Profile Picture</div>
+                <div class="panel-block blocky-panel">
+                    <div class="message is-italic is-fullwidth">Finally, how about an awesome picture?</div>
+                    <hr>
+                    <div class="panel panel-heading">
+                        <h3 class="is-size-5">Profile Picture</h3>
+                        <div class="field">
+                            <img src="{{newUser.img||defaultPic}}">
+                        </div>
+                        <div class="field">
+                            <div class="file">
+                                <label class="file-label">
+                                    <!-- Note: angular (1 at least) does not natively support the onchange event. So we need to sneak our way around it -->
+                                    <input class='file-input' type="file" fileread="user.avatar" onchange="angular.element(this).scope().loadFile()" />
+                                    <span class="file-cta">
+                                        <span class="file-icon">
+                                            <i class="fa fa-upload"></i>
+                                        </span>
+                                        <span class="file-label">
+                                            Upload a picture!
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="is-fullwidth has-text-centered">
+                <button class="button is-large is-link" ng-click='preview()'><i class="fa fa-eye"></i> Preview</button>
+                <button class="button is-large is-info" ng-click='clearAll()'><i class="fa fa-times"></i> Clear</button>
+            </div>
+            <!-- <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Profile Image</th>
+                        <th>Name</th>
+                        <th>Date of Birth</th>
+                        <th>Nationality</th>
+                        <th>Location</th>
+                        <th>Association</th>
+                        <th>Team</th>
+                        <th>Gender</th>
+                        <th>Sports</th>
+                        <th>About</th>
+                        <th>Interests</th>
+                        <th>Charities</th>
+                        <th>Social Media Handles</th>
+                        <th>Pets</th>
+                        <th>Drinks Alcohol</th>
+                        <th>Married</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='ath in athList'>
+                        <th>
+                            <img src="{{ath.prof||''}}" alt="{{ath.name}}'s Profile Image" ng-if='ath.prof'>
+                            <div ng-if='!ath.prof'>(No profile image submitted)</div>
+                        </th>
+                        <th>{{ath.name}}</th>
+                        <th>{{ath.dob}}</th>
+                        <th>{{ath.nationality}}</th>
+                        <th>{{ath.location}}</th>
+                        <th>{{ath.association}}</th>
+                        <th>{{ath.team}}</th>
+                        <th>{{ath.gender}}</th>
+                        <th>
+                            <ul>
+                                <li ng-repeat='sp in ath.sports'>{{sp}}</li>
+                                <li ng-if='!ath.sports.length' class='has-text-grey'>(None listed)</li>
+                            </ul>
+                        </th>
+                        <th>{{ath.about}}</th>
+                        <th>
+                            <ul>
+                                <li ng-repeat='int in ath.interests'>{{int}}</li>
+                                <li ng-if='!ath.interests.length' class='has-text-grey'>(None listed)</li>
+                            </ul>
+                        </th>
+                        <th>
+                            <ul>
+                                <li ng-repeat='ch in ath.charities'>{{ch}}</li>
+                                <li ng-if='!ath.charities.length' class='has-text-grey'>(None listed)</li>
+                            </ul>
+                        </th>
+                        <th>
+                            <ul>
+                                <li ng-repeat='soc in ath.socials'>{{soc}}</li>
+                                <li ng-if='!ath.socials.length' class='has-text-grey'>(None given)</li>
+                            </ul>
+                        </th>
+                        <th>
+                            <ul>
+                                <li ng-repeat='pet in ath.pets'>{{pet}}</li>
+                                <li ng-if='!ath.pets.length' class='has-text-grey'>(Not enough)</li>
+                            </ul>
+                        </th>
+                        <th>
+                            <div ng-if='ath.drinks=2'>Often</div>
+                            <div ng-if='ath.drinks=1'>Rarely</div>
+                            <div ng-if='!ath.drinks'>Never</div>
+                        </th>
+                        <th>
+                            <div ng-if='ath.married=2'>Married</div>
+                            <div ng-if='ath.married=1'>Divorced/Separated/Widowed</div>
+                            <div ng-if='!ath.married'>Single</div>
+                        </th>
+                    </tr>
+                    <tr ng-if='!athList.length'>
+                        <td colspan="16">
+                            <div class="message is-size-4 has-text-centered is-italic is-light-blue">
+                                <i class="fa fa-user"></i>
+                                No athletes yet! Why not head over and <a href="/add">add one</a>?
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+    </div>
+</div>
+
+<!-- 
+section 1 - demographic: name, nationality, gender, DOB, location
+section 2 - sports: sports, team, association 
+section 3 - miscellany: about, interests, charities, pets, married, drinks
+section 4: img;
+
+ -->

@@ -1,0 +1,60 @@
+@import "./components/bulma";
+html,
+body {
+    width: 100%;
+    margin: 0;
+    height: 100%; // padding-top: 40px;
+    // background: #000;
+    background: #bde5ff;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Menomonia', Arial, Helvetica, sans-serif;
+    background-attachment: fixed;
+}
+
+.main-box {
+    padding: 5px;
+    padding-top: 60px;
+    min-height: 140vh;
+}
+.is-light-blue{
+    background:#ddf;
+}
+.is-fullwidth{
+    width:100%!important;
+}
+.blocky-panel{
+    display:block;
+}
+.big-modal{
+    width:66%;
+    min-height:70vh;
+}
+.checklist{
+    &:before{
+        content:'✓ ';
+        left:0;
+        top:0;
+    }
+}
+.badlist{
+    &:before{
+        content:'✗ ';
+        left:0;
+        top:0;
+    }
+}
+.separated-marry{
+    // &:before{
+    //     text-decoration: line-through #ccf wavy;
+    //     // color:#f00!important;
+    // }
+    &:after{
+        content:'✗';
+        font-weight:900;
+        color:#ccf;
+        position:relative;
+        right:50%;
+        top:0;
+    }
+}

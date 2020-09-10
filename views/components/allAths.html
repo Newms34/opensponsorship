@@ -1,0 +1,44 @@
+<div ng-controller='allAth-cont' style='height:2000px'>
+    <div class="panel is-info">
+        <div class="panel-heading"><i class="fa fa-users"></i> Our Athletes</div>
+        <div class="panel-block has-background-white">
+            <table class="table is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>Profile Image</th>
+                        <th>Name</th>
+                        <th>Sports</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat='ath in athList'>
+                        <td>
+                            <img src="{{ath.img||''}}" alt="{{ath.name}}'s Profile Image" ng-if='ath.img'>
+                            <div ng-if='!ath.img'>(No profile image submitted)</div>
+                        </td>
+                        <td>{{ath.name}}</td>
+                        <td>
+                            <ul>
+                                <li ng-repeat='sp in ath.sports'>{{sp}}</li>
+                                <li ng-if='!ath.sports.length' class='has-text-grey'>(None listed)</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <button class="button is-link" ng-click='viewAth(ath)'><i class="fa fa-eye"></i> View</button>
+                            <button class="button is-daner" ng-click='deleteAth(ath)'><i class="fa fa-trash"></i> Delete</button>
+                        </td>             
+                    </tr>
+                    <tr ng-if='!athList.length'>
+                        <td colspan="4">
+                            <div class="message is-size-4 has-text-centered is-italic is-light-blue">
+                                <i class="fa fa-user separated-marry"></i>
+                                No athletes yet! Why not head over and <a href="/add">add one</a>?
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
